@@ -10,10 +10,23 @@ TELEGRAM_CHAT_ID = 5796341739
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.json
+
+    # Extract issue details
     issue_title = data.get('title', 'No Title')
     project_name = data.get('project', 'Unknown Project')
-    message = f"New Sentry Issue in {project_name}: {issue_title}"
+    culprit = data.get('culprit', 'No Culprit')
+    event_id = data.get('event_id', 'No Event ID')
+    level = data.get('level', 'No Level')
+    url = data.get('url', 'No URL')
 
+    # Create a detailed message
+    message = f"New Sentry Issue in {project_name}: {issue_title}\n"
+    message += f"Event ID: {event_id}\n"
+    message += f"Culprit: {culprit}\n"
+    message += f"Level: {level}\n"
+    message += f"URL: {url}"
+
+    # Send detailed message to Telegram
     send_telegram_message(message)
 
     return jsonify({'status': 'ok'})
