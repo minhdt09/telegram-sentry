@@ -27,3 +27,6 @@ def send_telegram_message(message):
     response = requests.post(url, params=params)
     return response.json()
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Hello Minh"

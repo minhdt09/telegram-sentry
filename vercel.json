@@ -1,14 +1,14 @@
  {
      "builds": [
          {
-             "src": "./sentry_telegram_webhook.py",
+             "src": "api/sentry_telegram_webhook.py",
              "use": "@vercel/python"
          }
      ],
      "routes": [
          {
              "src": "/(.*)",
-             "dest": "./sentry_telegram_webhook.py"
+             "dest": "api/sentry_telegram_webhook.py"
          }
      ]
  }
