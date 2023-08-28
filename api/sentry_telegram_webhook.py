@@ -10,6 +10,7 @@ TELEGRAM_CHAT_ID = 5796341739
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.json
+    app.logger.info(data)
 
     # Extract issue details
     issue_title = data.get('title', 'No Title')
