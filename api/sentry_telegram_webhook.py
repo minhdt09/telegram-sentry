@@ -21,7 +21,7 @@ def webhook():
     url = data.get('url', 'No URL')
 
     # Create a detailed message
-    message = f"New Sentry Issue in {project_name}: {issue_title}\n"
+    message = f"⚠️ New Sentry Issue in {project_name}: {issue_title}\n"
     message += f"Event ID: {event_id}\n"
     message += f"Culprit: {culprit}\n"
     message += f"Level: {level}\n"
