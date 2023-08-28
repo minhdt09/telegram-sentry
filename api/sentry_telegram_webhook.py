@@ -13,12 +13,12 @@ def webhook():
     app.logger.info(data)
 
     # Extract issue details
-    issue_title = data.get('title', 'No Title')
+    issue_title = data.get('message', 'No Title')
     project_name = data.get('project', 'Unknown Project')
     culprit = data.get('culprit', 'No Culprit')
     event_id = data.get('event_id', 'No Event ID')
     level = data.get('level', 'No Level')
-    url = data.get('url', 'No URL')
+    url = data.get('urls', 'No URL')
 
     # Create a detailed message
     message = f"New Sentry Issue in {project_name}: {issue_title}\n"
