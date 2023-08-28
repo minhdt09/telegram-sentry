@@ -20,8 +20,11 @@ def webhook():
     level = data.get('level', 'No Level')
     url = data.get('url', 'No URL')
 
+    # Style the project name using Markdown
+    project_name_styled = f"*{project_name.upper()}*"  # Bigger size and bold style
+
     # Create a detailed message
-    message = f"⚠️ New Sentry Issue in {project_name}: {issue_title}\n"
+    message = f"⚠️ New Sentry Issue in {project_name_styled}: {issue_title}\n"
     message += f"Event ID: {event_id}\n"
     message += f"Culprit: {culprit}\n"
     message += f"Level: {level}\n"
