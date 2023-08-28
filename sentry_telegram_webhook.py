@@ -1,22 +1,24 @@
-from flask import Flask, request, jsonify
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 
-app = Flask(__name__)
-
-# Your Telegram Bot Token and Chat ID
 TELEGRAM_BOT_TOKEN = "6507544190:AAGH-4YRNFFu7L-SO5YVFUbTodmxtrVbFww"
 TELEGRAM_CHAT_ID = 5796341739
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    data = request.json
-    issue_title = data.get('title', 'No Title')
-    project_name = data.get('project', 'Unknown Project')
-    message = f"New Sentry Issue in {project_name}: {issue_title}"
+class WebhookHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
 
-    send_telegram_message(message)
+        # Your existing processing logic here
+        # ...
 
-    return jsonify({'status': 'ok'})
+        message = "Your message to Telegram"
+        send_telegram_message(message)
+
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        self.wfile.write(b"OK")
 
 def send_telegram_message(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
@@ -28,4 +30,6 @@ def send_telegram_message(message):
     return response.json()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050)
+    server_address = ('', 8000)
+    httpd = HTTPServer(server_address, WebhookHandler)
+    httpd.serve_forever()
