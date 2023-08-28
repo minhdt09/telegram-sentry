@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 
 # Your Telegram Bot Token and Chat ID
-TELEGRAM_BOT_TOKEN = "6507544190:AAGH-4YRNFFu7L-SO5YVFUbTodmxtrVbFww"
-TELEGRAM_CHAT_ID = 5796341739
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
