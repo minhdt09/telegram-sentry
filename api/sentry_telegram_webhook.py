@@ -1,10 +1,6 @@
 from flask import Flask, request, jsonify
 import requests
 import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 app = Flask(__name__)
 
@@ -49,5 +45,6 @@ def send_telegram_message(message):
     response = requests.post(url, params=params)
     return response.json()
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+@app.route('/', methods=['GET'])
+def home():
+    return "Hello Minh"
