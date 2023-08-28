@@ -1,0 +1,12 @@
+version: '3'
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6011:6011"
+    environment:
+      - TELEGRAM_BOT_TOKEN=6507544190:AAGH-4YRNFFu7L-SO5YVFUbTodmxtrVbFww
+      - TELEGRAM_CHAT_ID=5796341739
+    command: ["python", "api/sentry_telegram_webhook.py"]
