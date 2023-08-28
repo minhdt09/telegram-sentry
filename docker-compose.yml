@@ -7,6 +7,6 @@ services:
     ports:
       - "6011:6011"
     environment:
-      - TELEGRAM_BOT_TOKEN=6507544190:AAGH-4YRNFFu7L-SO5YVFUbTodmxtrVbFww
-      - TELEGRAM_CHAT_ID=5796341739
+      - TELEGRAM_BOT_TOKEN=6401556110:AAFZs0ZcI4dX3NJ4QSo3mr3ctXbp8f_RoSo
+      - TELEGRAM_CHAT_ID=-940249870
     command: ["python", "api/sentry_telegram_webhook.py"]
